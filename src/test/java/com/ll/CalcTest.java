@@ -23,4 +23,30 @@ public class CalcTest {
   void t3(){
     assertThat(Calc.run("2 + 2")).isEqualTo(4);
   }
+
+  @Test
+  @DisplayName("123 + 456 == 579")
+  void t4(){
+    assertThat(Calc.run("123 + 456")).isEqualTo(579);
+  }
+
+  // 구현
+  @Test
+  @DisplayName("50 - 30 == 20")
+  void t5(){
+    assertThat(Calc.run("50 - 30")).isEqualTo(20);
+  }
+
+  @Test
+  @DisplayName("10 + 20 + 30 == 60")
+  void t6(){
+    assertThat(Calc.run("10 + 20 + 30")).isEqualTo(60);
+  }
+
+  @Test
+  @DisplayName("10 + 20 + 30 == 60")
+  void t7(){
+    assertThat(Calc.run("10 + 20 + 30")).isEqualTo(60);
+  }
+
 }
