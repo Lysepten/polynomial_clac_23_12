@@ -2,16 +2,33 @@ package com.ll;
 
 public class Calc {
   public static int run(String exp) {
-    boolean needToMultiply = exp.contains(" * ");
-    boolean needToPlus = exp.contains(" + ") || exp.contains(" - ");
+    boolean needToMultiply = exp.contains("*");
+    boolean needToPlus = exp.contains("+");
 
     boolean needToCompound = needToMultiply && needToPlus;
+
+
+    if(needToMultiply == false) {
+      if(needToPlus == false) {
+        exp = exp.replaceAll("\\- ", "\\+ \\-");
+        String[] bits = exp.split(" \\+ ");
+
+        int minus = 0;
+
+        for (int i = 0; i < bits.length; i++) {
+          minus += Integer.parseInt(bits[i]);
+        }
+
+        return minus;
+      }
+    }
 
     if (needToCompound) {
       String[] bits = exp.split(" \\+ ");
 
       return Integer.parseInt(bits[0]) + run(bits[1]);
     }
+
 
     if (needToPlus) {
       exp = exp.replaceAll("\\- ", "\\+ \\-");
