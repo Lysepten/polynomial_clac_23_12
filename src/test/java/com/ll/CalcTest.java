@@ -44,9 +44,8 @@ public class CalcTest {
   }
 
   @Test
-  @DisplayName("10 + 20 + 30 == 60")
-  void t7(){
-    assertThat(Calc.run("10 + 20 + 30")).isEqualTo(60);
+  @DisplayName("40 - 20 - 10 == 10")
+  void t7() { assertThat(Calc.run("40 - 20 - 10")).isEqualTo(10);
   }
 
 }
