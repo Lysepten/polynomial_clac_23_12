@@ -2,34 +2,19 @@ package com.ll;
 
 public class Calc {
   public static int run(String exp) {
-    boolean needToMultiply = exp.contains("*");
-    boolean needToPlus = exp.contains("+");
+
+    exp = stripOuterBracket(exp);
+
+    boolean needToMultiply = exp.contains(" * ");
+    boolean needToPlus = exp.contains(" + ") || exp.contains(" - ");
 
     boolean needToCompound = needToMultiply && needToPlus;
-
-
-    if(needToMultiply == false) {
-      if(needToPlus == false) {
-        exp = exp.replaceAll("\\- ", "\\+ \\-");
-        String[] bits = exp.split(" \\+ ");
-
-        int minus = 0;
-
-        for (int i = 0; i < bits.length; i++) {
-          minus += Integer.parseInt(bits[i]);
-        }
-
-        return minus;
-      }
-    }
 
     if (needToCompound) {
       String[] bits = exp.split(" \\+ ");
 
       return Integer.parseInt(bits[0]) + run(bits[1]);
     }
-
-
     if (needToPlus) {
       exp = exp.replaceAll("\\- ", "\\+ \\-");
 
@@ -54,5 +39,12 @@ public class Calc {
     }
 
     throw new RuntimeException("처리할 수 있는 계산식이 아닙니다");
+  }
+
+  private static String stripOuterBracket(String exp) {
+    if (exp.charAt(0) == '(' && exp.charAt(exp.length() - 1) == ')') {
+      exp = exp.substring(1, exp.length() - 1);
+    }
+    return exp;
   }
 }
